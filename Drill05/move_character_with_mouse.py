@@ -24,6 +24,7 @@ def character_move():
     global character_x, character_y
     global x, y
     global frame
+    global left
 
     x1, y1 = character_x, character_y
     x2, y2 = x, y
@@ -38,14 +39,24 @@ def character_move():
     x = random.randint(0, TUK_WIDTH)
     y = random.randint(0, TUK_HEIGHT)
 
+    if x < character_x:
+        left = True
+    elif x > character_x:
+        left = False
+
+
 def draw_scene():
     global frame
     global x, y
     global character_x, character_y
+    global left
 
     clear_canvas()
     TUK_ground.draw(TUK_WIDTH // 2, TUK_HEIGHT // 2)
-    character.clip_draw(frame * 100, 100 * 1, 100, 100, character_x, character_y)
+    if left == False:
+        character.clip_draw(frame * 100, 100 * 1, 100, 100, character_x, character_y)
+    elif left == True:
+        character.clip_composite_draw(frame * 100, 100 * 1, 100, 100, 0, 'h', character_x, character_y, 100, 100)
     hand.draw(x, y)
     update_canvas()
     frame = (frame + 1) % 8
@@ -57,6 +68,8 @@ hide_cursor()
 
 character_x = TUK_WIDTH // 2
 character_y = TUK_HEIGHT // 2
+
+left = False
 
 while running:
     character_move()
