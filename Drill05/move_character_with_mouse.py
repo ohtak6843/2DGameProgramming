@@ -16,8 +16,6 @@ def handle_events():
     for event in events:
         if event.type == SDL_QUIT:
             running = False
-        elif event.type == SDL_MOUSEMOTION:
-            x, y = event.x, TUK_HEIGHT - 1 - event.y
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             running = False
     pass
@@ -25,15 +23,17 @@ def handle_events():
 def character_move():
     global character_x, character_y
     global x, y
+    global frame
 
     x1, y1 = character_x, character_y
     x2, y2 = x, y
 
-    for i in range(0, 100 + 1, 10):
-        t = i / 100
-        x1 = (1 - t) * x1 + t * x
-        y1 = (1 - t) * y1 + t * y
+    for i in range(0, 1000 + 1, 10):
+        t = i / 1000
+        character_x = (1 - t) * x1 + t * x
+        character_y = (1 - t) * y1 + t * y
         draw_scene()
+        delay(0.01)
 
     x = random.randint(0, TUK_WIDTH)
     y = random.randint(0, TUK_HEIGHT)
