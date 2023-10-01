@@ -20,12 +20,23 @@ def handle_events():
             running = False
     pass
 
+def draw_scene():
+    global frame
+    global x, y
+    global hand_list
 
+    clear_canvas()
+    TUK_ground.draw(TUK_WIDTH // 2, TUK_HEIGHT // 2)
+    character.clip_draw(frame * 100, 100 * 1, 100, 100, x, y)
+    update_canvas()
+    frame = (frame + 1) % 8
 
 running = True
 x, y = TUK_WIDTH // 2, TUK_HEIGHT // 2
 frame = 0
 hide_cursor()
+
+hand_list = []
 
 while running:
     clear_canvas()
