@@ -24,8 +24,31 @@ def handle_events():
 
 def character_move():
     global character_x, character_y
+    global x, y
 
     x1, y1 = character_x, character_y
+    x2, y2 = x, y
+
+    for i in range(0, 100 + 1, 10):
+        t = i / 100
+        x1 = (1 - t) * x1 + t * x
+        y1 = (1 - t) * y1 + t * y
+        draw_scene()
+
+    x = random.randint(0, TUK_WIDTH)
+    y = random.randint(0, TUK_HEIGHT)
+
+def draw_scene():
+    global frame
+    global x, y
+    global character_x, character_y
+
+    clear_canvas()
+    TUK_ground.draw(TUK_WIDTH // 2, TUK_HEIGHT // 2)
+    character.clip_draw(frame * 100, 100 * 1, 100, 100, character_x, character_y)
+    hand.draw(x, y)
+    update_canvas()
+    frame = (frame + 1) % 8
 
 running = True
 x, y = TUK_WIDTH // 2, TUK_HEIGHT // 2
@@ -36,14 +59,7 @@ character_x = TUK_WIDTH // 2
 character_y = TUK_HEIGHT // 2
 
 while running:
-    clear_canvas()
-    TUK_ground.draw(TUK_WIDTH // 2, TUK_HEIGHT // 2)
-    character.clip_draw(frame * 100, 100 * 1, 100, 100, character_x, character_y)
-    x = random.randint(0, TUK_WIDTH)
-    y = random.randint(0, TUK_HEIGHT)
-    hand.draw(x, y)
-    update_canvas()
-    frame = (frame + 1) % 8
+    character_move()
 
     handle_events()
 
