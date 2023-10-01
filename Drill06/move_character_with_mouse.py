@@ -38,6 +38,28 @@ def draw_scene():
     update_canvas()
     frame = (frame + 1) % 8
 
+def character_move():
+    global x, y
+    global hand_list
+    global character_x, character_y
+
+    x1, y1 = character_x, character_y
+    if len(hand_list) > 0:
+        (x2, y2) = hand_list[0]
+
+    for i in range(1, 1000 + 1, 10):
+        t = i / 1000
+
+        if len(hand_list) > 0:
+            character_x = (1 - t) * x1 + t * x2
+            character_y = (1 - t) * y1 + t * y2
+
+        draw_scene()
+        delay(0.01)
+
+    if len(hand_list) > 0:
+        del hand_list[0]
+
 running = True
 x, y = TUK_WIDTH // 2, TUK_HEIGHT // 2
 frame = 0
@@ -48,7 +70,7 @@ character_x, character_y = TUK_WIDTH // 2, TUK_HEIGHT // 2
 hand_list = []
 
 while running:
-    draw_scene()
+    character_move()
 
     handle_events()
 
