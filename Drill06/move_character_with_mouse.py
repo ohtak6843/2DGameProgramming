@@ -12,6 +12,7 @@ def handle_events():
     global running
     global x, y
     global hand_list
+
     events = get_events()
     for event in events:
         if event.type == SDL_QUIT:
@@ -28,37 +29,40 @@ def draw_scene():
     global frame
     global x, y
     global hand_list
+    global character_x, character_y
 
     clear_canvas()
     TUK_ground.draw(TUK_WIDTH // 2, TUK_HEIGHT // 2)
     character.clip_draw(frame * 100, 100 * 1, 100, 100, character_x, character_y)
     hand.draw(x, y)
-    for (temp_x, temp_y) in hand_list:
-        hand.draw(temp_x, temp_y)
+    if len(hand_list) > 0:
+        for temp_x, temp_y in hand_list:
+            hand.draw(temp_x, temp_y)
     update_canvas()
     frame = (frame + 1) % 8
 
 def character_move():
+    global frame
     global x, y
     global hand_list
     global character_x, character_y
+    global first_x, first_y
+    global i
 
-    x1, y1 = character_x, character_y
-    if len(hand_list) > 0:
-        (x2, y2) = hand_list[0]
+    x1, y1 = first_x, first_y
+    x2, y2 = hand_list[0]
 
-    for i in range(1, 1000 + 1, 10):
-        t = i / 1000
+    t = i / 1000
 
-        if len(hand_list) > 0:
-            character_x = (1 - t) * x1 + t * x2
-            character_y = (1 - t) * y1 + t * y2
+    character_x = (1 - t) * x1 + t * x2
+    character_y = (1 - t) * y1 + t * y2
 
-        draw_scene()
-        delay(0.01)
+    i = i + 10
 
-    if len(hand_list) > 0:
+    if i > 1000:
         del hand_list[0]
+        i = 1
+        first_x, first_y = character_x, character_y
 
 running = True
 x, y = TUK_WIDTH // 2, TUK_HEIGHT // 2
@@ -66,11 +70,18 @@ frame = 0
 hide_cursor()
 
 character_x, character_y = TUK_WIDTH // 2, TUK_HEIGHT // 2
+first_x, first_y = TUK_WIDTH // 2, TUK_HEIGHT // 2
 
 hand_list = []
 
+i = 1
+
 while running:
-    character_move()
+    draw_scene()
+    if len(hand_list) > 0:
+        character_move()
+
+    delay(0.01)
 
     handle_events()
 
