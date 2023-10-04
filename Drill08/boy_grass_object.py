@@ -108,5 +108,4 @@ while running:
     delay(0.05)
 
 # finalization code
-
 close_canvas()
