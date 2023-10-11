@@ -1,4 +1,4 @@
-# 이것은 각 상태들을 객체로 구현한 것임.
+# 이것은 각 상태들을 객체로 구현한 것임
 
 from pico2d import *
 import math
