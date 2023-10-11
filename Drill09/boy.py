@@ -152,10 +152,10 @@ class StateMachine:
         self.cur_state = Sleep
         self.boy = boy
         self.transitions = {
-            Sleep: {right_down: Run, right_up: Idle, left_down: Run, left_up: Idle, space_down: Idle},
-            Idle: {a_down: AutoRun, right_down: Run, right_up: Idle, left_down: Run, left_up: Idle, time_out: Sleep},
-            Run: {right_down: Run, right_up: Idle, left_down: Run, left_up: Idle},
-            AutoRun: {time_out: Idle}
+            Sleep: {right_down: Run, right_up: Run, left_down: Run, left_up: Run, space_down: Idle},
+            Idle: {a_down: AutoRun, right_down: Run, right_up: Run, left_down: Run, left_up: Run, time_out: Sleep},
+            Run: {right_down: Idle, right_up: Idle, left_down: Idle, left_up: Idle},
+            AutoRun: {time_out: Idle, right_down: Run, right_up: Run, left_down: Run, left_up: Run}
         }
 
     def handle_event(self, e):
