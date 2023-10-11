@@ -50,14 +50,18 @@ class AutoRun:
     @staticmethod
     def do(boy):
         boy.frame = (boy.frame + 1) % 8
-        boy.x += boy.dir * 5
+        boy.x += boy.dir * 10
+        if boy.x < 50:
+            boy.dir, boy.action = 1, 1
+        if boy.x > 750:
+            boy.dir, boy.action = -1, 0
         if get_time() - boy.idle_start_time > 5:
             boy.state_machine.handle_event(('TIME_OUT', 0))
         pass
 
     @staticmethod
     def draw(boy):
-        boy.image.clip_draw(boy.frame * 100, boy.action * 100, 100, 100, boy.x, boy.y, 200, 200)
+        boy.image.clip_draw(boy.frame * 100, boy.action * 100, 100, 100, boy.x, boy.y + 35, 200, 200)
         pass
 
 
