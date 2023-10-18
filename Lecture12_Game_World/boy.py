@@ -1,6 +1,9 @@
 # 이것은 각 상태들을 객체로 구현한 것임.
 
 from pico2d import get_time, load_image, SDL_KEYDOWN, SDL_KEYUP, SDLK_SPACE, SDLK_LEFT, SDLK_RIGHT
+from ball import Ball
+import game_world
+
 
 # state event check
 # ( state event type, event value )
@@ -20,14 +23,16 @@ def left_down(e):
 def left_up(e):
     return e[0] == 'INPUT' and e[1].type == SDL_KEYUP and e[1].key == SDLK_LEFT
 
+
 def space_down(e):
     return e[0] == 'INPUT' and e[1].type == SDL_KEYDOWN and e[1].key == SDLK_SPACE
+
 
 def time_out(e):
     return e[0] == 'TIME_OUT'
 
-# time_out = lambda e : e[0] == 'TIME_OUT'
 
+# time_out = lambda e : e[0] == 'TIME_OUT'
 
 
 class Idle:
@@ -40,11 +45,13 @@ class Idle:
             boy.action = 3
         boy.dir = 0
         boy.frame = 0
-        boy.wait_time = get_time() # pico2d import 필요
+        boy.wait_time = get_time()  # pico2d import 필요
         pass
 
     @staticmethod
     def exit(boy, e):
+        if space_down(e):
+            boy.fire_ball()
         pass
 
     @staticmethod
@@ -58,18 +65,19 @@ class Idle:
         boy.image.clip_draw(boy.frame * 100, boy.action * 100, 100, 100, boy.x, boy.y)
 
 
-
 class Run:
 
     @staticmethod
     def enter(boy, e):
-        if right_down(e) or left_up(e): # 오른쪽으로 RUN
+        if right_down(e) or left_up(e):  # 오른쪽으로 RUN
             boy.dir, boy.face_dir, boy.action = 1, 1, 1
-        elif left_down(e) or right_up(e): # 왼쪽으로 RUN
+        elif left_down(e) or right_up(e):  # 왼쪽으로 RUN
             boy.dir, boy.face_dir, boy.action = -1, -1, 0
 
     @staticmethod
     def exit(boy, e):
+        if space_down(e):
+            boy.fire_ball()
         pass
 
     @staticmethod
@@ -81,7 +89,6 @@ class Run:
     @staticmethod
     def draw(boy):
         boy.image.clip_draw(boy.frame * 100, boy.action * 100, 100, 100, boy.x, boy.y)
-
 
 
 class Sleep:
@@ -114,8 +121,8 @@ class StateMachine:
         self.boy = boy
         self.cur_state = Idle
         self.transitions = {
-            Idle: {right_down: Run, left_down: Run, left_up: Run, right_up: Run, time_out: Sleep},
-            Run: {right_down: Idle, left_down: Idle, right_up: Idle, left_up: Idle},
+            Idle: {right_down: Run, left_down: Run, left_up: Run, right_up: Run, time_out: Sleep, space_down: Idle},
+            Run: {right_down: Idle, left_down: Idle, right_up: Idle, left_up: Idle, space_down: Run},
             Sleep: {right_down: Run, left_down: Run, right_up: Run, left_up: Run, space_down: Idle}
         }
 
@@ -139,9 +146,6 @@ class StateMachine:
         self.cur_state.draw(self.boy)
 
 
-
-
-
 class Boy:
     def __init__(self):
         self.x, self.y = 400, 90
@@ -161,3 +165,12 @@ class Boy:
 
     def draw(self):
         self.state_machine.draw()
+
+    def fire_ball(self):
+        if self.face_dir == -1:
+            print('FIRE BALL LEFT')
+        elif self.face_dir == 1:
+            print('FIRE BALL RIGHT')
+
+        ball = Ball(self.x, self.y, self.face_dir * 10)
+        game_world.add_object(ball, 1)
