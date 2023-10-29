@@ -12,11 +12,9 @@ class Heart:
         if Heart.image == None:
             Heart.image = load_image('Heart.png')
 
-
     def draw(self, HP):
         for i in range(0, HP):
             Heart.image.draw(self.x + self.sizeX * i, self.y, self.sizeX, self.sizeY)
-
 
     def update(self):
         pass
