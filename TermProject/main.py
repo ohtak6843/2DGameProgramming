@@ -16,8 +16,12 @@ def handle_events():
 
 
 def create_world():
-    global hearts
+    global running
     global HP
+    global balls
+    global stick
+    global table
+    global hearts
 
     HP = 6
 
@@ -26,10 +30,11 @@ def create_world():
     balls = load_image('Balls.png')
     stick = load_image('Stick.png')
     table = load_image('Table.jpg')
-    hearts = Heart(HP)
+
+    hearts = Heart()
 
 
-open_canvas()
+open_canvas(WINDOW_WIDTH, WINDOW_HEIGHT)
 create_world()
 
 while running:
