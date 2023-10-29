@@ -1,7 +1,7 @@
 from pico2d import *
 
 
-class table:
+class Table:
     image = None
 
     def __init__(self, x=800, y=450, sizeX=1600, sizeY=1000):

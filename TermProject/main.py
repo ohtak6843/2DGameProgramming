@@ -1,5 +1,6 @@
 from pico2d import *
-from heart import *
+from Heart import *
+from Table import *
 
 WINDOW_WIDTH, WINDOW_HEIGHT = 1600, 900
 
@@ -32,6 +33,7 @@ def create_world():
     table = load_image('Table.jpg')
 
     hearts = Heart()
+    table = Table()
 
 
 def update_world():
@@ -46,7 +48,7 @@ def render_world():
 
     clear_canvas()
 
-    table.draw(800, 450, 1600, 1000)  # 2/5 사이즈
+    table.draw()  # 2/5 사이즈
     balls.draw(400, 0, 150, 150)  # 1/10 사이즈
     stick.draw(500, 500, 240, 240)  # 1/5 사이즈
     hearts.draw(HP)
