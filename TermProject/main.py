@@ -38,17 +38,27 @@ def update_world():
     hearts.update()
 
 
-    
+def render_world():
+    global hearts, HP
+    global balls
+    global table
+    global stick
+
+    clear_canvas()
+
+    table.draw(800, 450, 1600, 1000)  # 2/5 사이즈
+    balls.draw(400, 0, 150, 150)  # 1/10 사이즈
+    stick.draw(500, 500, 240, 240)  # 1/5 사이즈
+    hearts.draw(HP)
+
+    update_canvas()
 
 
 open_canvas(WINDOW_WIDTH, WINDOW_HEIGHT)
 create_world()
 
 while running:
-    table.draw(800, 450, 1600, 1000)  # 2/5 사이즈
-    balls.draw(400, 0, 150, 150)  # 1/10 사이즈
-    stick.draw(500, 500, 240, 240)  # 1/5 사이즈
-    hearts.draw(HP)
-    update_canvas()
     handle_events()
+    update_world()
+    render_world()
     delay(0.1)
