@@ -5,6 +5,8 @@ class Heart:
     image = None
     sizeX = 66
     sizeY = 60
+    x = 66
+    y = 700
 
     def __init__(self):
         if Heart.image == None:
