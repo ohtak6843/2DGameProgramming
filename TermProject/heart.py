@@ -16,3 +16,7 @@ class Heart:
     def draw(self, HP):
         for i in range(0, HP):
             Heart.image.draw(self.x + self.sizeX * i, self.y, self.sizeX, self.sizeY)
+
+
+    def update(self):
+        pass

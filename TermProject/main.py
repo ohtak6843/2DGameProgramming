@@ -34,6 +34,13 @@ def create_world():
     hearts = Heart()
 
 
+def update_world():
+    hearts.update()
+
+
+    
+
+
 open_canvas(WINDOW_WIDTH, WINDOW_HEIGHT)
 create_world()
 
