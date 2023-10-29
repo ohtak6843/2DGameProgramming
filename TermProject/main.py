@@ -1,4 +1,5 @@
 from pico2d import *
+import heart
 
 WINDOW_WIDTH, WINDOW_HEIGHT = 1600, 900
 open_canvas(WINDOW_WIDTH, WINDOW_HEIGHT)
@@ -17,7 +18,6 @@ def handle_events():
 
 balls = load_image('Balls.png')
 stick = load_image('Stick.png')
-heart = load_image('Heart.png')
 table = load_image('Table.jpg')
 
 running = True
