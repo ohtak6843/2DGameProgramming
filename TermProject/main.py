@@ -2,7 +2,6 @@ from pico2d import *
 from heart import *
 
 WINDOW_WIDTH, WINDOW_HEIGHT = 1600, 900
-open_canvas(WINDOW_WIDTH, WINDOW_HEIGHT)
 
 
 def handle_events():
@@ -16,18 +15,28 @@ def handle_events():
             running = False
 
 
-balls = load_image('Balls.png')
-stick = load_image('Stick.png')
-table = load_image('Table.jpg')
-heart = Heart()
+def create_world():
+    global hearts
+    global HP
 
-running = True
+    HP = 6
+
+    running = True
+
+    balls = load_image('Balls.png')
+    stick = load_image('Stick.png')
+    table = load_image('Table.jpg')
+    hearts = Heart(HP)
+
+
+open_canvas()
+create_world()
 
 while running:
     table.draw(800, 450, 1600, 1000)  # 2/5 사이즈
     balls.draw(400, 0, 150, 150)  # 1/10 사이즈
     stick.draw(500, 500, 240, 240)  # 1/5 사이즈
-    heart.draw(5)
+    hearts.draw(HP)
     update_canvas()
     handle_events()
     delay(0.1)
