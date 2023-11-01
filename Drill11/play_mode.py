@@ -3,9 +3,9 @@ import game_framework
 
 import game_world
 from grass import Grass
-from boy import Boy
+from bird import Bird
 
-# boy = None
+# bird = None
 
 def handle_events():
     events = get_events()
@@ -15,19 +15,47 @@ def handle_events():
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             game_framework.quit()
         else:
-            boy.handle_event(event)
+            bird.handle_event(event)
+            pass
 
 def init():
     global grass
-    global boy
+    global bird, bird2, bird3, bird4, bird5, bird6, bird7, bird8, bird9, bird10
 
     running = True
 
     grass = Grass()
     game_world.add_object(grass, 0)
 
-    boy = Boy()
-    game_world.add_object(boy, 1)
+    bird = Bird()
+    game_world.add_object(bird, 1)
+
+    bird2 = Bird()
+    game_world.add_object(bird2, 1)
+
+    bird3 = Bird()
+    game_world.add_object(bird3, 1)
+
+    bird4 = Bird()
+    game_world.add_object(bird4, 1)
+
+    bird5 = Bird()
+    game_world.add_object(bird5, 1)
+
+    bird6 = Bird()
+    game_world.add_object(bird6, 1)
+
+    bird7 = Bird()
+    game_world.add_object(bird7, 1)
+
+    bird8 = Bird()
+    game_world.add_object(bird8, 1)
+
+    bird9 = Bird()
+    game_world.add_object(bird9, 1)
+
+    bird10 = Bird()
+    game_world.add_object(bird10, 1)
 
 
 def finish():
