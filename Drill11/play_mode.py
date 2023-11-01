@@ -30,32 +30,32 @@ def init():
     bird = Bird()
     game_world.add_object(bird, 1)
 
-    bird2 = Bird()
-    game_world.add_object(bird2, 1)
-
-    bird3 = Bird()
-    game_world.add_object(bird3, 1)
-
-    bird4 = Bird()
-    game_world.add_object(bird4, 1)
-
-    bird5 = Bird()
-    game_world.add_object(bird5, 1)
-
-    bird6 = Bird()
-    game_world.add_object(bird6, 1)
-
-    bird7 = Bird()
-    game_world.add_object(bird7, 1)
-
-    bird8 = Bird()
-    game_world.add_object(bird8, 1)
-
-    bird9 = Bird()
-    game_world.add_object(bird9, 1)
-
-    bird10 = Bird()
-    game_world.add_object(bird10, 1)
+    # bird2 = Bird()
+    # game_world.add_object(bird2, 1)
+    #
+    # bird3 = Bird()
+    # game_world.add_object(bird3, 1)
+    #
+    # bird4 = Bird()
+    # game_world.add_object(bird4, 1)
+    #
+    # bird5 = Bird()
+    # game_world.add_object(bird5, 1)
+    #
+    # bird6 = Bird()
+    # game_world.add_object(bird6, 1)
+    #
+    # bird7 = Bird()
+    # game_world.add_object(bird7, 1)
+    #
+    # bird8 = Bird()
+    # game_world.add_object(bird8, 1)
+    #
+    # bird9 = Bird()
+    # game_world.add_object(bird9, 1)
+    #
+    # bird10 = Bird()
+    # game_world.add_object(bird10, 1)
 
 
 def finish():
