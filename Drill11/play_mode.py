@@ -15,47 +15,21 @@ def handle_events():
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             game_framework.quit()
         else:
-            bird.handle_event(event)
+            # bird.handle_event(event)
             pass
 
 def init():
     global grass
-    global bird, bird2, bird3, bird4, bird5, bird6, bird7, bird8, bird9, bird10
+    global bird
 
     running = True
 
     grass = Grass()
     game_world.add_object(grass, 0)
 
-    bird = Bird()
-    game_world.add_object(bird, 1)
-
-    # bird2 = Bird()
-    # game_world.add_object(bird2, 1)
-    #
-    # bird3 = Bird()
-    # game_world.add_object(bird3, 1)
-    #
-    # bird4 = Bird()
-    # game_world.add_object(bird4, 1)
-    #
-    # bird5 = Bird()
-    # game_world.add_object(bird5, 1)
-    #
-    # bird6 = Bird()
-    # game_world.add_object(bird6, 1)
-    #
-    # bird7 = Bird()
-    # game_world.add_object(bird7, 1)
-    #
-    # bird8 = Bird()
-    # game_world.add_object(bird8, 1)
-    #
-    # bird9 = Bird()
-    # game_world.add_object(bird9, 1)
-    #
-    # bird10 = Bird()
-    # game_world.add_object(bird10, 1)
+    birds = [Bird() for i in range(10)]
+    for bird in birds:
+        game_world.add_object(bird, 1)
 
 
 def finish():

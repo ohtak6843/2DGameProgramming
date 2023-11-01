@@ -48,7 +48,7 @@ RUN_SPEED_PPS = RUN_SPEED_MPS * PIXEL_PER_METER
 # fill here
 TIME_PER_ACTION = 1.0
 ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
-FRAMES_PER_ACTION = 8
+FRAMES_PER_ACTION = 14
 FRAMES_PER_TIME = ACTION_PER_TIME * FRAMES_PER_ACTION
 
 
@@ -113,7 +113,14 @@ class Run:
             bird.frame = 0
         # bird.x += bird.dir * 5
         bird.x += bird.dir * RUN_SPEED_PPS * game_framework.frame_time
+
+        if bird.x > 1550:
+            bird.dir, bird.face_dir = -1, -1
+        elif bird.x < 50:
+            bird.dir, bird.face_dir = 1, 1
+
         bird.x = clamp(25, bird.x, 1600-25)
+
 
 
     @staticmethod
@@ -131,7 +138,8 @@ class Run:
 class StateMachine:
     def __init__(self, bird):
         self.bird = bird
-        self.cur_state = Idle
+        self.cur_state = Run
+        bird.dir = 1
         self.transitions = {
             Idle: {right_down: Run, left_down: Run, left_up: Run, right_up: Run, space_down: Idle},
             Run: {right_down: Idle, left_down: Idle, right_up: Idle, left_up: Idle, space_down: Run},
